@@ -1,0 +1,505 @@
+@charset "UTF-8";
+/********************************
+*画面遷移
+********************************/
+#splash {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 900;
+  text-align: center;
+  color: #fff;
+}
+
+#splash_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  width: 100%;
+  z-index: 900;
+}
+
+#splash_logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body {
+  background: #2a2afa;
+}
+
+body.appear {
+  background: #2a2afa;
+}
+
+.splash_bg1,
+.splash_bg2 {
+  display: none;
+}
+
+body.appear .splash_bg1,
+body.appear .splash_bg2 {
+  display: block;
+}
+
+body.appear .splash_bg1 {
+  animation: PageAnime 1.2s ease-in-out forwards;
+  content: "";
+  position: fixed;
+  z-index: 900;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 50%;
+  transform: scaleX(1);
+  background-color: #2a2afa;
+}
+
+body.appear .splash_bg2 {
+  animation: PageAnime2 1.2s ease-in-out forwards;
+  content: "";
+  position: fixed;
+  z-index: 900;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  right: 50%;
+  transform: scaleX(1);
+  background-color: #2a2afa;
+}
+
+@keyframes PageAnime {
+  0% {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+  50% {
+    transform-origin: right;
+  }
+  100% {
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+}
+@keyframes PageAnime2 {
+  0% {
+    transform-origin: right;
+    transform: scaleX(1);
+  }
+  50% {
+    transform-origin: left;
+  }
+  100% {
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+}
+#container {
+  opacity: 0;
+}
+
+body.appear #container {
+  animation: PageAnimeApp 1s 0.2s forwards;
+  opacity: 0;
+}
+
+@keyframes PageAnimeApp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/********************************
+*ナビゲーション
+********************************/
+#open_btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 900;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+#open_btn span {
+  display: inline-block;
+  transition: all 0.4s;
+  position: absolute;
+  right: 10px;
+  height: 3px;
+  border-radius: 5px;
+  background-color: #2a2afa;
+  width: 30px;
+  z-index: 900;
+}
+#open_btn span:nth-of-type(1) {
+  top: 15px;
+}
+#open_btn span:nth-of-type(2) {
+  top: 25px;
+}
+#open_btn span:nth-of-type(3) {
+  top: 35px;
+}
+#open_btn.active span:nth-of-type(1) {
+  top: 18px;
+  right: 18px;
+  transform: translateY(6px) rotate(-45deg);
+  width: 40px;
+}
+#open_btn.active span:nth-of-type(2) {
+  opacity: 0;
+}
+#open_btn.active span:nth-of-type(3) {
+  top: 30px;
+  right: 18px;
+  transform: translateY(-6px) rotate(45deg);
+  width: 40px;
+}
+
+#g-nav.panel #g-nav-list {
+  position: fixed;
+  z-index: 800;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+}
+
+#g-nav {
+  position: fixed;
+  z-index: 800;
+  top: -120%;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  transition: all 0.6s;
+}
+#g-nav.panel {
+  top: 0;
+}
+
+#g-nav ul {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 800;
+}
+
+nav ul {
+  text-align: center;
+}
+nav ul li {
+  font-size: 2rem;
+}
+nav ul li a {
+  display: inline-block;
+  color: #2a2afa;
+  padding: 10px;
+}
+
+/******************************
+*フェードイン
+*******************************/
+.fadeIn {
+  animation: fadeInAnime 2s forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInAnime {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/******************************
+*ページ内スクロール
+******************************/
+#page_top a {
+  display: flex;
+  justify-content: center;
+  background-color: 2a2afa;
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+}
+#page_top a:hover {
+  background: #b6b5b5;
+  height: 55px;
+}
+
+#page_top {
+  position: fixed;
+  bottom: 0px;
+  right: 10px;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+#page_top.UpMove {
+  animation: UpAnime 0.5s forwards;
+}
+
+@keyframes UpAnime {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#page_top.DownMove {
+  animation: DownAnime 0.5s forwards;
+}
+
+@keyframes DownAnime {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(100px);
+  }
+}
+#page_top span {
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  width: 13px;
+  height: 13px;
+  border-top: 4px solid #fff;
+  border-left: 4px solid #fff;
+  transform: rotate(45deg);
+}
+
+/******************************
+*拡大アニメーション
+******************************/
+.zoomOut {
+  animation: zoomOutAnime 0.5s forwards;
+}
+
+.zoomOutTrigger {
+  opacity: 0;
+}
+
+@keyframes zoomOutAnime {
+  from {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/******************************
+*テキストが流れるように出現
+******************************/
+.slide_in {
+  overflow: hidden;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.slide_in_inner {
+  display: inline-block;
+}
+
+.leftAnime {
+  opacity: 0;
+}
+
+.slideAnimeLeftRight {
+  animation: slideText 0.8s forwards;
+}
+
+@keyframes slideText {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.slideAnimeRightLeft {
+  animation: slideText2 0.8s forwards;
+}
+
+@keyframes slideText2 {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+/******************************
+* テキストが光りながら出現
+******************************/
+.glowAnime span {
+  opacity: 0;
+}
+
+.glowAnime.glow span {
+  animation: glow_anime_on 1s ease-out forwards;
+}
+
+@keyframes glow_anime_on {
+  0% {
+    opacity: 0;
+    text-shadow: 0 0 0 #fff, 0 0 0 #fff;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px #fff, 0 0 15px #fff;
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 0 #fff, 0 0 0 #fff;
+  }
+}
+/******************************
+* テキストがじわっと出現
+******************************/
+.blur {
+  animation: blurAnime 1s forwards;
+}
+
+.blurTrigger {
+  opacity: 0;
+}
+
+@keyframes blurAnime {
+  from {
+    filter: blur(10px);
+    transform: scale(1.03);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/******************************
+* ボタン変化
+******************************/
+.btn1 {
+  position: relative;
+  display: inline-block;
+  color: #333;
+  border: 1px solid #ccc;
+  outline: none;
+  overflow: hidden;
+}
+.btn1 span {
+  display: block;
+  z-index: 20;
+}
+.btn1:hover {
+  border-color: #2a2afa;
+  transition-delay: 0.6s;
+  color: #fff;
+}
+
+.border_top span::before,
+.border_top span::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 0;
+  background: #2a2afa;
+  transition: all 0.3s;
+}
+
+.border_top span::before {
+  left: 0;
+  top: 0;
+}
+
+.border_top span::after {
+  right: 0;
+  bottom: 0;
+}
+
+.border_top:hover span::before,
+.border_top:hover span::after {
+  height: 100%;
+}
+
+.border_top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 0;
+  background: #2a2afa;
+  transition: all 0.3s;
+}
+
+.border_top:hover::before {
+  height: 100%;
+  transition-delay: 0.4s;
+  background: #2a2afa;
+}
+
+/******************************
+* テキスト切り替え
+******************************/
+.btn-change {
+  position: relative;
+  border: 1px solid #333;
+  min-width: 210px;
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
+  outline: none;
+  transition: all 0.2s;
+}
+.btn-change:hover {
+  background: #2a2afa;
+  color: #fff;
+}
+.btn-change:hover span:nth-child(1) {
+  opacity: 0;
+}
+.btn-change:hover span:nth-child(2) {
+  opacity: 1;
+}
+.btn-change span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+  display: block;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+.btn-change span:nth-child(2) {
+  opacity: 0;
+}/*# sourceMappingURL=parts.css.map */
